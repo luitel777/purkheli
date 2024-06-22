@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purkheli</title>
+  <link rel="stylesheet" href="/static/form.css">
+</head>
+
+<body>
+  <h1><a href="/">Purkheli</a></h1>
+  <hr>
+  <form method="POST" action="/api/setcomments?postid={{ .Id }}" enctype="multipart/form-data" class="form-container">
+
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text" class="input-field">
+    <br>
+
+    <label for="file">Upload File</label>
+    <input id="file" name="file" type="file" class="input-field"><br>
+
+    <label for="textarea">Text</label>
+    <textarea id="textarea" name="textarea" required class="textarea-field"></textarea>
+    <br>
+
+    <button type="submit" class="submit-button">Submit</button>
+
+  </form>
+</body>
+
+</html>

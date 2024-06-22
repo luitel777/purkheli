@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purkheli</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+  <h1><a href="/">Purkheli</a></h1>
+  <a href="/create">Create New Post</a>
+  <hr>
+
+  <div class="posts">
+    {{range .}}
+    <div class="post">
+      <div class="title">{{.Params.Title}}</div>
+      <pre>
+        <div class="text">
+          <span class="truncate">{{.Params.Textarea}}</span>
+        </div>
+      </pre>
+      <div class="file">{{.Params.Imgpath}}</div>
+      <div class="time">Time: {{.Params.Time}}</div>
+      <a href="posts/{{ .Id }}" class="view-full">View Full Post</a>
+    </div>
+    {{end}}
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var fileElements = document.querySelectorAll(".file");
+      fileElements.forEach(function (fileElement) {
+        var filename = fileElement.innerText.trim();
+        if (filename === "nil") {
+          fileElement.innerHTML = "";
+          return;
+        }
+        var extension = filename.split('.').pop().toLowerCase();
+        if (["jpg", "png", "jpeg"].includes(extension)) {
+          fileElement.innerHTML = "<img src='/uploads/" + filename + "' alt='Image'>";
+        } else {
+          fileElement.innerHTML = "<a href='/uploads/" + filename + "'>" + filename + "</a>";
+        }
+      });
+
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purkheli</title>
+  <link rel="stylesheet" href="/static/single.css">
+</head>
+
+<body>
+  <h1><a href="../../">Purkheli</a></h1>
+  <div class="post-container">
+    <h2>Post</h2>
+    <div class="title">{{.DataField.Title}}</div>
+    <div class="text">{{.DataField.Textarea}}</div>
+    <div class="file">{{.DataField.Imgpath}}</div>
+    <div class="time">Time: {{.DataField.Time}}</div>
+  </div>
+
+  <div class="comments-container">
+    <h2>Comments</h2>
+    <div class="comments">
+      {{range .Comments}}
+      <div class="comment">
+        <div class="title">{{.Params.Title}}</div>
+        <div class="text">{{.Params.Textarea}}</div>
+        <div class="file">{{.Params.Imgpath}}</div>
+        <div class="time">Time: {{.Params.Time}}</div>
+        <hr>
+      </div>
+      <br>
+      {{end}}
+    </div>
+  </div>
+
+  <a href="/posts/{{.PostId}}/create" class="new-comment-link">Post a new comment</a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var fileElements = document.querySelectorAll(".file");
+      fileElements.forEach(function (fileElement) {
+        var filename = fileElement.innerText.trim();
+        if (filename === "nil") {
+          fileElement.innerHTML = "";
+          return;
+        }
+        var extension = filename.split('.').pop().toLowerCase();
+        if (["jpg", "png", "jpeg"].includes(extension)) {
+          fileElement.innerHTML = "<img src='/uploads/" + filename + "' alt='Image'>";
+        } else {
+          fileElement.innerHTML = "<a href='/uploads/" + filename + "'>" + filename + "</a>";
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
