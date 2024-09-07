@@ -15,7 +15,6 @@ import (
 // url: /api/setcomments
 func (V Values) setComments(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseMultipartForm(32 << 40)
-	fmt.Println(r)
 	if err != nil {
 		http.Error(w, "Error while parsing\r\n"+err.Error(), http.StatusBadRequest)
 		return
@@ -58,7 +57,6 @@ func (V Values) setComments(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte("successfully submitted the comment on id " + id))
-	w.WriteHeader(http.StatusOK)
 	V.db.CloseDB()
 	return
 }

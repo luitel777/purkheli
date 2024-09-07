@@ -1,16 +1,13 @@
 package template
 
 import (
-	"fmt"
+	"html/template"
 	"log"
 	"net/http"
-	"html/template"
 )
 
 // url: /create
 func CreateNewPost(w http.ResponseWriter, r *http.Request) {
-
-	fmt.Println(w.Header().Get("error"))
 
 	tmpl, err := template.ParseFiles("web/create.html")
 	if err != nil {

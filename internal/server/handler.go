@@ -20,7 +20,7 @@ func (P *PurkheliHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		data := []byte("index")
 		w.Write(data)
 	default:
-		data := []byte("error")
+		data := []byte("/ not found")
 		w.Write(data)
 	}
 }
