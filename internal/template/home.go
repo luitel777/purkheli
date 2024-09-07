@@ -55,12 +55,7 @@ func ConvertJson(endpoint string) (error, []Data) {
 
 // url :/
 func Homepage(w http.ResponseWriter) {
-	err, fields := ConvertJson("http://localhost:9000/api/getposts")
-	if err != nil {
-		http.Error(w, "Cannot evaluate posts for some reason: " + err.Error(), http.StatusInternalServerError)
-		fields = []Data{}
-		return
-	}
+	_, fields := ConvertJson("http://localhost:9000/api/getposts")
 	tmpl, err := template.ParseFiles("web/index.html")
 	if err != nil {
 		http.Error(w, "Error parsing template", http.StatusInternalServerError)
